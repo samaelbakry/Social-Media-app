@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin './hero.js';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@layer utilities{
+    .gradient{
+        /* @apply bg-violet-600 rounded-full size-19 blur-2xl */
+        @apply bg-radial from-gray-500 to-gray-200 min-h-screen 
+    }
+    .bg-blur{
+        @apply bg-white/10 backdrop-blur-xl rounded-2xl border border-white/30 shadow-2xl font-semibold
+    }
+}
