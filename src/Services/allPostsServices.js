@@ -6,6 +6,9 @@ export async function getAllPosts() {
         const response = await axios.get(`${API_BASE_URL}/posts?limit=50` , {
             headers:{
                 token:localStorage.getItem("token")
+            },
+             params:{
+                sort:"-createdAt",
             }
         } )
         return response
@@ -22,6 +25,22 @@ export async function getPostsId(postId) {
             headers:{
                 token:localStorage.getItem("token")
             }
+        } )
+        return response
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+export async function createPost(formData) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/posts` , formData , {
+            headers:{
+                token:localStorage.getItem("token")
+            } , 
+           
         } )
         return response
         

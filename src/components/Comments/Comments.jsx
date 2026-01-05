@@ -1,13 +1,18 @@
-import { Button } from "@heroui/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
 import userImage from "../../assets/userImage2.jpg";
 import { IoIosSend } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { createComment } from "../../Services/comments";
+import { homeContext } from "../../context/HomeContext";
+import { HiDotsVertical } from "react-icons/hi";
+import { CiEdit } from "react-icons/ci";
+import { AiFillDelete } from "react-icons/ai";
 
 export default function Comments({postComments , setPostComments , post}) {
     
       const [commentMsg, setCommentMsg] = useState("");
       const [isLoading, setIsLoading] = useState(false);
+      const { userData } = useContext(homeContext)
 
     async function sendComment(comment) {
     setIsLoading(true);
@@ -74,8 +79,25 @@ export default function Comments({postComments , setPostComments , post}) {
                                           {comment.content}
                                         </p>
                                       </div>
+                                      
                                     </div>
+                                         { post.user._id === userData._id  && userData._id === postComments[0].commentCreator._id ?<>
+           <Dropdown className="bg-blur font-bold ">
+          <DropdownTrigger>
+            <HiDotsVertical className="text-2xl" />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions" variant="faded">
+            <DropdownItem key="edit" startContent={<CiEdit className="text-2xl"/>}>
+              Edit Post
+            </DropdownItem>
+            <DropdownItem key="delete" className="text-danger" color="danger" startContent={<AiFillDelete className="text-2xl"/>} >
+              Delete Post
+            </DropdownItem>
+            </DropdownMenu>
+           </Dropdown>
+           </> : "" } 
                                   </div>
+                            
                                 </>
                               ))}
   </>

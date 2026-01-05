@@ -14,12 +14,14 @@ import {
 import { IoCreateOutline } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
 import { homeContext } from "../../context/HomeContext";
+import { createPost } from "../../Services/allPostsServices";
 
-export default function CreatePostDetails() {
-    const {userData} = useContext(homeContext)
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClose  }) {
+  const {userData} = useContext(homeContext)
   const [backdrop] = React.useState("blur");
   const [selectedImage, setSelectedImage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const textArea = useRef()
   const inputFile = useRef()
@@ -34,6 +36,28 @@ export default function CreatePostDetails() {
   function handleClose(){
     setSelectedImage("")
     onClose()
+  }
+
+  async function createNewPost() {
+    const formData= new FormData()
+    if(textArea.current.value){
+      formData.append("body",textArea.current.value)
+    }
+    if(selectedImage){
+      formData.append("image",selectedImage)
+    }
+    try {
+      setIsLoading(true)
+      const { data } = await createPost(formData)
+       getPosts()
+      console.log(data);
+       onClose()
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setIsLoading(false)
+    }
+    
   }
 
 
@@ -55,7 +79,7 @@ export default function CreatePostDetails() {
                 <img
                   src={userData.photo}
                   alt={userData.name}
-                  className=" w-13 rounded-full bg-transparent m-2"
+                  className=" w-13 rounded-full bg-transparent shadow shadow-violet-500 m-2"
                 />
                 <div className="flex flex-col gap-1">
                   <span className="capitalize">{userData.name}</span>
@@ -74,9 +98,11 @@ export default function CreatePostDetails() {
                 </div>
               </ModalBody>
                  <ModalFooter className="flex items-center gap-4">
-                  <Input ref={inputFile} onChange={chooseFile} className="hidden" type="file"/>
+                  <span className="font-semibold text-white">Only JPG, JPEG, or PNG images are allowed</span>
+                  <Input ref={inputFile} accept="image/png,image/jpeg,image/jpg" onChange={chooseFile} className="hidden" type="file"/>
                   <ImAttachment onClick={openFile}  className="text-2xl text-gray-300 cursor-pointer"/>
-                <Button color="secondary">
+                  
+                <Button isLoading={isLoading} onPress={createNewPost} color="secondary">
                   Upload
                 </Button>
               </ModalFooter>

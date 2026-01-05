@@ -31,7 +31,6 @@ export default function Register() {
 async function sendFormData(formData){
   try {
     const response =  await registerForm(formData)
-     localStorage.setItem("userName" ,formData.name)
     if(response.data.message === "success"){
       setTimeout(() => {
        navigate("/login")

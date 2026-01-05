@@ -1,15 +1,15 @@
 import { CiClock2, CiEdit } from "react-icons/ci";
+import { useContext } from "react";
+import { homeContext } from "../../context/HomeContext";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@heroui/react'
+import CreatePostDetails from "../CreatePostDetails/CreatePostDetails";
 import { HiDotsVertical } from "react-icons/hi";
 import { AiFillDelete } from "react-icons/ai";
 
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@heroui/react";
 
 export default function PostHeader({ post }) {
+  const {userData} = useContext(homeContext)
+   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <div className="card-title flex items-center justify-between">
@@ -34,21 +34,23 @@ export default function PostHeader({ post }) {
             </p>
           </div>
         </div>
-        <Dropdown className="bg-blur font-bold ">
-          <DropdownTrigger>
+       { post.user._id === userData._id ?  
+       <Dropdown className="bg-blur">
+        <DropdownTrigger>
             <HiDotsVertical className="text-2xl" />
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions" variant="faded">
-            <DropdownItem key="edit" startContent={<CiEdit className="text-2xl"/>}>
+            <DropdownItem onPress={onOpen} key="edit" startContent={<CiEdit className="text-2xl"/>}>
               Edit Post
             </DropdownItem>
-
             <DropdownItem key="delete" className="text-danger" color="danger" startContent={<AiFillDelete className="text-2xl"/>} >
               Delete Post
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> : ""}
+         {/* <CreatePostDetails isOpen={isOpen} onOpen={onOpen} onClose={onClose}/> */}
       </div>
+     
     </>
   );
 }

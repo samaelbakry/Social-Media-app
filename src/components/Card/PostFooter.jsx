@@ -4,18 +4,21 @@ import { FaRegFaceLaughSquint } from "react-icons/fa6";
 import { FcLike } from "react-icons/fc";
 import { IoIosSend } from "react-icons/io";
 import userImage from "../../assets/userImage2.jpg";
-import { CiCircleChevDown } from "react-icons/ci";
+import { CiCircleChevDown, CiEdit } from "react-icons/ci";
 import PostDetails from "../PostDetails/PostDetails";
-import {Button, useDisclosure,} from "@heroui/react";
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure,} from "@heroui/react";
 import { createComment } from "../../Services/comments";
 import { useContext, useState } from "react";
 import { homeContext } from "../../context/HomeContext";
+import { HiDotsVertical } from "react-icons/hi";
+import { AiFillDelete } from "react-icons/ai";
 
 export default function PostFooter({ post , postComments , setPostComments }) {
 
  const { isOpen, onOpen, onOpenChange } = useDisclosure();
  const [commentMsg, setCommentMsg] = useState("")
- const { isLoading , setIsLoading}= useContext(homeContext)
+ const [isLoading, setIsLoading] = useState(false)
+  const {userData} = useContext(homeContext)
 
  async function sendComment(comment) {
     setIsLoading(true)
@@ -96,9 +99,26 @@ export default function PostFooter({ post , postComments , setPostComments }) {
                   </p>
                 </div>
               </div>
-              <button onClick={onOpen } className="mx-2 text-gray-800 font-semibold cursor-pointer" >view all comments
-                <CiCircleChevDown className="inline-block mx-1 text-xl" />
-              </button>
+              <div className="flex items-center">
+                <button onClick={onOpen} className="mx-2 text-gray-800 font-semibold cursor-pointer" >view all comments
+                <CiCircleChevDown className="inline-block mx-1 text-xl" /></button>
+           { post.user._id === userData._id  && userData._id === postComments[0].commentCreator._id ?<>
+           <Dropdown className="bg-blur font-bold ">
+          <DropdownTrigger>
+            <HiDotsVertical className="text-2xl" />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions" variant="faded">
+            <DropdownItem key="edit" startContent={<CiEdit className="text-2xl"/>}>
+              Edit Post
+            </DropdownItem>
+            <DropdownItem key="delete" className="text-danger" color="danger" startContent={<AiFillDelete className="text-2xl"/>} >
+              Delete Post
+            </DropdownItem>
+            </DropdownMenu>
+           </Dropdown>
+           </> : "" }  
+              </div>
+           
          </div>
              <PostDetails postId={post._id} isOpen={isOpen} onOpenChange={onOpenChange} setPostComments={setPostComments} postComments ={postComments} />
           </>
@@ -107,3 +127,4 @@ export default function PostFooter({ post , postComments , setPostComments }) {
     </>
   );
 }
+

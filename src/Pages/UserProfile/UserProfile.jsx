@@ -9,14 +9,20 @@ import UsePostBody from "./UsePostBody";
 import UserPostFooter from "./UserPostFooter";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import { IoCamera } from "react-icons/io5";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { homeContext } from "../../context/HomeContext";
 import { CiUser } from "react-icons/ci";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
+import { getUserPosts } from "../../Services/userServices";
+import PostSkeleton from "../../components/PostSkeleton/PostSkeleton";
+import UserPostCard from "./UserPostCard";
 
 
 export default function UserProfile() {
-  const {userData} = useContext(homeContext)
+  const { userData } = useContext(homeContext)
+  const [ userPosts , setUserPosts] = useState([])
+   const [isLoading, setIsLoading] = useState(false)
+  const userId = userData?._id
   const info = [
     {
       icon:<MdDriveFileRenameOutline className="text-violet-900 text-2xl"/>,
@@ -38,6 +44,26 @@ export default function UserProfile() {
     icon:<LiaBirthdayCakeSolid className="text-violet-900 text-2xl"/>,
     data:userData.dateOfBirth
   }]
+  async function getAllUserPosts(  ) {
+    try {
+      setIsLoading(true)
+      const {data} = await getUserPosts(userId)
+      setUserPosts(data.posts)
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+   if (userId) {
+    getAllUserPosts()
+  }
+  }, [userId])
+  
+
   
   return <>
  <div className="grid lg:grid-cols-8 grid-cols-4 min-h-screen bg-linear-to-bl from-gray-200 to-gray-400">
@@ -53,30 +79,33 @@ export default function UserProfile() {
    </div>
     </div>
     {/* USER INFO */}
-    <div className="lg:col-span-3 col-span-4 bg-blur p-5 space-y-4 m-5">
-    <span className="mb-5 p-2 text-2xl ">User information</span>
+    <div className="lg:col-span-3 col-span-4 bg-blur p-5 space-y-4 m-5 self-start">
+    <span className="mb-5 p-2 text-2xl ">Account information</span>
     <Divider/>
     {info.map((info) => <div className="flex items-center gap-4 "> 
     {info.icon}
-    <span className="text-xl font-light">{info.data}</span>
+    <span className="text-xl font-semibold">{info.data}</span>
   </div>)}
   <form>
    <div className="flex flex-col space-y-4">
     <span className="text-2xl p-1 m-1">Update your information</span>
     <Divider/>
-    <Input  className="text-2xl" type="password" placeholder="Enter your password"startContent={ <TbLockPassword />}/>
-    <Input className="text-2xl" type="text" placeholder="change your password ?" startContent={ <TbLockPassword />}/>
+    <Input  className="text-2xl" type="password" placeholder="Enter your password"endContent={ <TbLockPassword />}/>
+    <Input className="text-2xl" type="text" placeholder="Enter new password" endContent={ <TbLockPassword />}/>
    </div>
   </form>
     </div>
    {/* USER POSTS */}
     <div className="lg:col-span-5 col-span-4 bg-blur m-5 p-5">
     <CreatePost/>
-    <div className="shadow bg-gray-200 border border-gray-200 m-4 sm:m-4 p-3 sm:p-4 rounded-3xl">
-      <UserPostHeader/>
-      <UsePostBody/>
-      <UserPostFooter/>
-    </div>
+      { isLoading ? [...Array(3)].map( ()=> <PostSkeleton />)  : <>
+      { userPosts && <>
+      {userPosts.map( (post)=>{ return <>
+      <UserPostCard post={post}/>
+      </> })}
+      </>}
+     </>}
+
     </div>
 
 </div>
@@ -86,4 +115,4 @@ export default function UserProfile() {
   </>
 }
 
-//style={{ backgroundImage: `url(${headerImage})` }}
+

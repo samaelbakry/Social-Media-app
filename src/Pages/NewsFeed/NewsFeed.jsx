@@ -12,7 +12,7 @@ import { getAllPosts } from "../../Services/allPostsServices";
 
 export default function NewsFeed() {
  
-   const { isLoading , setIsLoading  }= useContext(homeContext)
+   const [isLoading, setIsLoading] = useState(false)
     const [posts, setPosts] = useState([]);
 
   async function getPosts() { //all posts
@@ -20,7 +20,6 @@ export default function NewsFeed() {
       setIsLoading(true)
       const { data } = await getAllPosts();
       setPosts(data.posts);
-    
     } catch (error) {
       console.log(error);
       
@@ -31,7 +30,6 @@ export default function NewsFeed() {
     useEffect(() => {
     getPosts();
   }, []);
-
 
   return (
     <>
@@ -49,7 +47,7 @@ export default function NewsFeed() {
           {/* middle column + posts */}
           <div className="lg:col-span-4 col-span-8">
             <div className="bg-blur ">
-            <CreatePost/>
+            <CreatePost getPosts={getPosts}/>
              <Stories/>
               { isLoading ? [...Array(5)].map( ()=> <PostSkeleton />) : <>
               {posts &&
@@ -60,7 +58,7 @@ export default function NewsFeed() {
             </div>
           </div>
           {/* last column  */}
-          <div className="hidden lg:block col-span-2 bg-blur p-2 self-start ">
+          <div className="hidden lg:block col-span-2 bg-blur p-2 self-start">
             <ThirdSideBar />
           </div>
         </div>
