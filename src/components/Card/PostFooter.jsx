@@ -103,7 +103,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
             placeholder=" Add comment...."
             className="bg-gray-200/60 rounded-xl w-full p-2 placeholder:text-gray-700"
           />
-          <Button disabled={!commentMsg} isLoading={isLoading}
+          <Button disabled={commentMsg ? false : true} isLoading={isLoading}
             onPress={() => {
               if (editingCommentId) {
                 updateMyComment(editingCommentId, commentMsg);
@@ -114,8 +114,8 @@ export default function PostFooter({ post, postComments, setPostComments }) {
                 });
               }
             }}
-            className="cursor-pointer bg-violet-600 shadow-xl rounded-3xl">
-            <IoIosSend className="text-3xl text-gray-200" />
+            className="cursor-pointer bg-violet-600 shadow-2xl  rounded-3xl disabled:bg-gray-200 disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed ">
+            <IoIosSend className="text-3xl text-gray-300 " />
           </Button>
         </div>
         {/* COMMENT DATA */}

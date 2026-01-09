@@ -13,6 +13,7 @@ import { homeContext } from "../../context/HomeContext";
 import { HiDotsVertical } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import { AiFillDelete } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 export default function Comments({ postComments, setPostComments, post }) {
   const [commentMsg, setCommentMsg] = useState("");
@@ -38,11 +39,11 @@ export default function Comments({ postComments, setPostComments, post }) {
     try {
         const { data } = await deleteComment(commentId)
         console.log(data);
-       
-        
         getNewComments()
     } catch (error) {
         console.log(error);
+    }finally{
+      toast.success("Done! comment was deleted")
     }
  }
  async function getNewComments() {
@@ -68,6 +69,8 @@ export default function Comments({ postComments, setPostComments, post }) {
       getNewComments()
     } catch (error) {
       console.log(error);
+    }finally{
+      toast.success("Done! comment was updated")
     }
   }
   return (
@@ -93,7 +96,7 @@ export default function Comments({ postComments, setPostComments, post }) {
           }}
           }
           isLoading={isLoading}
-          className="cursor-pointer bg-violet-600 shadow-xl outline-2 outline-violet-300 outline-offset-4 rounded-3xl disabled:bg-transparent disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed disabled:outline-0"
+          className="cursor-pointer bg-violet-600 shadow-xl  rounded-3xl disabled:bg-transparent disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed "
         >
           <IoIosSend className="text-3xl text-gray-200" />
         </Button>

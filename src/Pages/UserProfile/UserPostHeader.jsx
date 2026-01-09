@@ -6,6 +6,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { AiFillDelete } from "react-icons/ai";
 import CreatePostDetails from '../../components/CreatePostDetails/CreatePostDetails';
 import { deletePost } from '../../Services/allPostsServices';
+import { toast } from 'react-toastify';
 
 
 export default function UserPostHeader( {post , getAllUserPosts}) {
@@ -18,7 +19,6 @@ export default function UserPostHeader( {post , getAllUserPosts}) {
       setIsLoading(true)
        const { data } = await deletePost(post._id)
       console.log(data);
-      
       getAllUserPosts()
       onClose()
     } catch (error) {
@@ -26,6 +26,7 @@ export default function UserPostHeader( {post , getAllUserPosts}) {
     }finally{
       setIsLoading(false)
       toast.success("Done! The post was deleted")
+      onClose()
     }
   }
  

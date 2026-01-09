@@ -15,7 +15,7 @@ import { homeContext } from "../../context/HomeContext";
 import { createPost, updatePost } from "../../Services/allPostsServices";
 import { toast } from "react-toastify";
 
-export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClose ,getAllUserPosts, post }) {
+export default function CreatePostDetails( { getPosts , isOpen , onOpen ,onOpenChange, onClose ,getAllUserPosts, post }) {
   const {userData} = useContext(homeContext)
   const [backdrop] = React.useState("blur");
   const [selectedImage, setSelectedImage] = useState(post?.image || "")
@@ -34,6 +34,7 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
   }
   function handleClose(){
     setSelectedImage("")
+    onOpenChange(false)
     onClose()
   }
 
@@ -58,15 +59,15 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
       console.log(data);
     }
       getPosts()
-      onClose()
-      getAllUserPosts()
     } catch (error) {
       console.log(error);
     }finally{
       setIsLoading(false)
+      // getAllUserPosts()
+      onClose()
     }
-    
   }
+
 
   return (
     <>

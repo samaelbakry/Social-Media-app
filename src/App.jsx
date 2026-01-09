@@ -17,9 +17,10 @@ function App() {
 
             {index:true, element: <ProtectedRoutes> <Navigate to={"/home"} /> </ProtectedRoutes>},
             {path:"/home" , element: <ProtectedRoutes><NewsFeed /></ProtectedRoutes>},
-            {path:"*",element:<NotFound />}]
+           {path:"*",element:<NotFound />}]
         },
         { path :"/userprofile", element:<ProtectedRoutes> <UserProfile /> </ProtectedRoutes>},
+         
 
         { path :"/", element: <AuthLayout/>, children: [
 

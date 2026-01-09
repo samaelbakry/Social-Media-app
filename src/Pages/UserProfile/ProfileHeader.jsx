@@ -44,7 +44,7 @@ const { userData } = useContext(homeContext)
   
 
   return <>
-  <div className="lg:col-span-8 col-span-4 bg-blur p-6 m-5 flex justify-start items-center gap-1">
+  <div className="lg:col-span-8 col-span-4 bg-blur p-6 m-5 flex justify-start items-center gap-1 ">
      <div className="relative">
     {isLoading ? <Skeleton className="rounded-full size-30" /> :
      <img src={uploadUserPhoto ? URL.createObjectURL(uploadUserPhoto) : 
@@ -53,7 +53,7 @@ const { userData } = useContext(homeContext)
      <input onChange={choosePhoto} type="file" ref={uploadPhoto} className='hidden'/>
      </div>
      <div className="flex flex-col items-center p-1">
-      <h2 className="font-semibold text-2xl text-violet-900 capitalize">{userData.name}</h2>
+      <h2 className="font-semibold text-4xl text-violet-900 capitalize">{userData.name}</h2>
       <span>1,200 friends</span>
      </div>
       </div>

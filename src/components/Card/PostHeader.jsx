@@ -26,6 +26,7 @@ export default function PostHeader({ post , getPosts }) {
       console.log(error);
     }finally{
       setIsLoading(false)
+      onClose()
     }
   }
 
