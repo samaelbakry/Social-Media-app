@@ -9,3 +9,29 @@ export async function createComment(comment) {
         })
     return data
 }
+
+export async function deleteComment(commentId) {
+    const data = await axios.delete(`${API_BASE_URL}/comments/${commentId}`,{
+            headers:{
+                token:localStorage.getItem("token")
+            }
+        })
+    return data
+}
+
+export async function getPostComments(postId) {
+    const data = await axios.get(`${API_BASE_URL}/posts/${postId}/comments`,{
+            headers:{
+                token:localStorage.getItem("token")
+            }
+        })
+    return data
+}
+export async function updateComment(postId , content) {
+    const data = await axios.put(`${API_BASE_URL}/comments/${postId}`, content, {
+            headers:{
+                token:localStorage.getItem("token")
+            }
+        })
+    return data
+}

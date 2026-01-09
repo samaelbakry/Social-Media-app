@@ -1,15 +1,34 @@
 import { CiClock2, CiEdit } from "react-icons/ci";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { homeContext } from "../../context/HomeContext";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure } from '@heroui/react'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Spinner, useDisclosure } from '@heroui/react'
 import CreatePostDetails from "../CreatePostDetails/CreatePostDetails";
 import { HiDotsVertical } from "react-icons/hi";
 import { AiFillDelete } from "react-icons/ai";
+import { deletePost } from "../../Services/allPostsServices";
+import { toast } from "react-toastify";
 
 
-export default function PostHeader({ post }) {
+export default function PostHeader({ post , getPosts }) {
   const {userData} = useContext(homeContext)
    const { isOpen, onOpen, onClose } = useDisclosure();
+     const [isLoading, setIsLoading] = useState(false)
+
+    async function deleteMyPost() {
+    try {
+      setIsLoading(true)
+       const { data } = await deletePost(post._id)
+      console.log(data);
+      toast.success("Done! The post was deleted")
+      getPosts()
+      onClose()
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
       <div className="card-title flex items-center justify-between">
@@ -17,7 +36,7 @@ export default function PostHeader({ post }) {
           <img
             src={post.user.photo}
             alt={post.user.name}
-            className="size-12 rounded-full mx-3"
+            className="size-20 object-cover rounded-full mx-3"
           />
           <div className="flex flex-col">
             <h1 className="text-xl font-semibold capitalize">
@@ -34,8 +53,7 @@ export default function PostHeader({ post }) {
             </p>
           </div>
         </div>
-       { post.user._id === userData._id ?  
-       <Dropdown className="bg-blur">
+       { post.user._id === userData._id ? <Dropdown className="bg-blur">
         <DropdownTrigger>
             <HiDotsVertical className="text-2xl" />
           </DropdownTrigger>
@@ -43,12 +61,13 @@ export default function PostHeader({ post }) {
             <DropdownItem onPress={onOpen} key="edit" startContent={<CiEdit className="text-2xl"/>}>
               Edit Post
             </DropdownItem>
-            <DropdownItem key="delete" className="text-danger" color="danger" startContent={<AiFillDelete className="text-2xl"/>} >
-              Delete Post
+            <DropdownItem onClick={deleteMyPost} key="delete" className="text-danger" color="danger" startContent={<AiFillDelete className="text-2xl"/>} >
+              {isLoading ? <Spinner color="secondary"/> : ""} Delete Post
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown> : ""}
-         {/* <CreatePostDetails isOpen={isOpen} onOpen={onOpen} onClose={onClose}/> */}
+        </Dropdown>: ""}
+        <CreatePostDetails post={post} osOpen={onOpen} isOpen={isOpen} getPosts={getPosts}/>
+        
       </div>
      
     </>

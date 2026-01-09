@@ -37,7 +37,6 @@ export default function Register() {
           navigate("/home");
           localStorage.setItem("token", response.data.token);
           setIsLoggedIn(true);
-         
         }, 2000);
         
          toast.success("Account Logged in Successfully !", {

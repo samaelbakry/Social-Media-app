@@ -6,20 +6,19 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
   Textarea,
   Badge,
   Input,
 } from "@heroui/react";
-import { IoCreateOutline } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
 import { homeContext } from "../../context/HomeContext";
-import { createPost } from "../../Services/allPostsServices";
+import { createPost, updatePost } from "../../Services/allPostsServices";
+import { toast } from "react-toastify";
 
-export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClose  }) {
+export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClose ,getAllUserPosts, post }) {
   const {userData} = useContext(homeContext)
   const [backdrop] = React.useState("blur");
-  const [selectedImage, setSelectedImage] = useState("")
+  const [selectedImage, setSelectedImage] = useState(post?.image || "")
   const [isLoading, setIsLoading] = useState(false)
 
 
@@ -46,12 +45,21 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
     if(selectedImage){
       formData.append("image",selectedImage)
     }
+    setIsLoading(true)
     try {
-      setIsLoading(true)
-      const { data } = await createPost(formData)
-       getPosts()
+      if(post)
+        { const { data } = await updatePost(post?._id , formData)
+      toast.success('Done! Your post is updated')
       console.log(data);
-       onClose()
+    }
+      else
+        {const { data } = await createPost(formData)
+       toast.success('Your post was published')
+      console.log(data);
+    }
+      getPosts()
+      onClose()
+      getAllUserPosts()
     } catch (error) {
       console.log(error);
     }finally{
@@ -60,17 +68,9 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
     
   }
 
-
   return (
     <>
-      <div className="flex flex-wrap gap-3">
-        <Button className="bg-gray-100 p-1 m-2" onPress={onOpen}>
-          <span className="text-md font-bold text-violet-900 p-4 cursor-pointer ">
-            Create post
-            <IoCreateOutline className="inline-block mx-2" />
-          </span>
-        </Button>
-      </div>
+     
       <Modal backdrop={backdrop} scrollBehavior="inside" isOpen={isOpen} onClose={handleClose} >
         <ModalContent className="bg-blur max-w-3xl">
           {(onClose) => (
@@ -79,7 +79,7 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
                 <img
                   src={userData.photo}
                   alt={userData.name}
-                  className=" w-13 rounded-full bg-transparent shadow shadow-violet-500 m-2"
+                  className="size-20 rounded-full object-cover bg-transparent shadow shadow-violet-500 m-2"
                 />
                 <div className="flex flex-col gap-1">
                   <span className="capitalize">{userData.name}</span>
@@ -91,10 +91,11 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
               <ModalBody className="bg-gray-50 shadow text-black shadow-violet-300 rounded-2xl p-4 m-4 ">
                 <div className="flex flex-col gap-4 items-center">
                   <Textarea
-                  placeholder="Got something to say ?...."
+                  defaultValue={post?.body}  
+                  placeholder={ post ? "Update" : "Got something to say ?...."}
                   ref={textArea}
                   minRows={ selectedImage ? " " : "8" } />
-                  {selectedImage && <img src={URL.createObjectURL(selectedImage)} className="size-80 object-cover"  alt="post-image"/> }
+                  {selectedImage && <img src={ post?.image ? post?.image : URL.createObjectURL(selectedImage)} className="size-80 object-cover"  alt="post-image"/> }
                 </div>
               </ModalBody>
                  <ModalFooter className="flex items-center gap-4">
@@ -103,7 +104,7 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen , onClos
                   <ImAttachment onClick={openFile}  className="text-2xl text-gray-300 cursor-pointer"/>
                   
                 <Button isLoading={isLoading} onPress={createNewPost} color="secondary">
-                  Upload
+                   { post ? "Update" : "Upload"}
                 </Button>
               </ModalFooter>
             </>

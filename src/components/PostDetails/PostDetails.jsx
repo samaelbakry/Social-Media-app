@@ -9,11 +9,13 @@ import { BiLike } from "react-icons/bi";
 import { FaRegFaceLaughSquint } from "react-icons/fa6";
 import { FaComment } from "react-icons/fa";
 import Comments from "../Comments/Comments";
+import { homeContext } from "../../context/HomeContext";
 
 
 export default function PostDetails({ onOpenChange,isOpen, postId, setPostComments, postComments }) {
  const [isLoading, setIsLoading] = useState(false)
   const [post, setPost] = useState("");
+    const { userData } = useContext(homeContext);
 
   async function getDetails() {
     setIsLoading(true);

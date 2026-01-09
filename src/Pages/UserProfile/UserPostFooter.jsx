@@ -6,7 +6,7 @@ import { homeContext } from "../../context/HomeContext";
 import { Button, Dropdown,DropdownItem, DropdownMenu, DropdownTrigger, useDisclosure,} from "@heroui/react";
 import { IoIosSend } from "react-icons/io";
 import userImage from "../../assets/userImage2.jpg";
-import { createComment } from "../../Services/comments";
+import { createComment, deleteComment, getPostComments } from "../../Services/comments";
 import { CiCircleChevDown, CiEdit } from "react-icons/ci";
 import { HiDotsVertical } from "react-icons/hi";
 import PostDetails from "../../components/PostDetails/PostDetails";
@@ -20,8 +20,6 @@ export default function UserPostFooter({ post }) {
   const { userData } = useContext(homeContext);
   const [isLoading, setIsLoading] = useState(false);
 
-
-
   async function sendComment(comment) {
     setIsLoading(true);
     try {
@@ -34,6 +32,27 @@ export default function UserPostFooter({ post }) {
       setIsLoading(false);
     }
   }
+
+   async function deleteMyComment(commentId) {
+    try {
+        const { data } = await deleteComment(commentId)
+        console.log(data);
+        
+        getNewComments()
+    } catch (error) {
+        console.log(error);
+    }
+   }
+   async function getNewComments() {
+    try {
+        const { data } = await getPostComments(post._id)
+         console.log(data);
+        setPostComments(data.comments)
+    } catch (error) {
+        console.log(error);
+    }
+ }
+
   function getComment(e) {
     setCommentMsg(e.target.value);
   }
@@ -82,40 +101,36 @@ export default function UserPostFooter({ post }) {
           <IoIosSend className="text-3xl text-gray-400" />
         </Button>
       </div>
-
+     
       {/* COMMENT DATA */}
-      {postComments.length !==0 && (
-        <>
-          <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl">
-            <div className="flex items-center gap-2">
-              <img
-                src={
-                  postComments[0].commentCreator.photo.includes("/undefined")
-                    ? userImage
-                    : postComments[0].commentCreator.photo
-                }
-                alt={postComments[0].commentCreator.name}
-                className=" border border-violet-900 outline-offset-4 m-2 rounded-full size-10"
-              />
-              <div className="flex flex-col gap-1">
-                <span className="font-bold capitalize text-gray-800">
-                  {postComments[0].commentCreator.name}
-                </span>
-                <p className="w-full rounded-lg text-gray-800">
-                  {postComments[0].content}
-                </p>
+       {postComments.length !== 0 && (
+          <>
+        <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl">
+              <div className="flex items-center gap-2">
+                <img
+                  src={
+                    postComments[0].commentCreator.photo.includes("/undefined")
+                      ? userImage
+                      : postComments[0].commentCreator.photo
+                  }
+                  alt={postComments[0].commentCreator.name}
+                  className=" border border-violet-900 outline-offset-4 m-2 rounded-full size-10"
+                />
+                <div className="flex flex-col gap-1">
+                  <span className="font-bold capitalize text-gray-800">
+                    {postComments[0].commentCreator.name}
+                  </span>
+                  <p className="w-full rounded-lg text-gray-800">
+                    {postComments[0].content}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center">
-              <button
-                onClick={onOpen}
-                className="mx-2 text-gray-800 font-semibold cursor-pointer"
-              >
-                view all comments
+              <div className="flex items-center">
+                <button onClick={onOpen} className="mx-2 text-gray-800 font-semibold cursor-pointer" >view all comments
                 <CiCircleChevDown className="inline-block mx-1 text-xl" />
-              </button>
-              {post.user._id === userData._id &&
-              userData._id === postComments[0].commentCreator._id ? (
+                </button> 
+                 {post.user._id === userData._id &&
+                 userData._id === postComments[0].commentCreator._id ? (
                 <>
                   <Dropdown className="bg-blur font-bold ">
                     <DropdownTrigger>
@@ -126,33 +141,34 @@ export default function UserPostFooter({ post }) {
                         key="edit"
                         startContent={<CiEdit className="text-2xl" />}
                       >
-                        Edit Post
+                        Edit comment
                       </DropdownItem>
                       <DropdownItem
                         key="delete"
                         className="text-danger"
+                        onPress={()=>{deleteMyComment(postComments[0]._id)}}
                         color="danger"
                         startContent={<AiFillDelete className="text-2xl" />}
                       >
-                        Delete Post
+                        Delete comment
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                 </>
-              ) : (
-                ""
-              )}
+              ) : ("")} 
             </div>
+             
+          
           </div>
-          <PostDetails
+          
+ <PostDetails
             postId={post._id}
             isOpen={isOpen}
             onOpenChange={onOpenChange}
             setPostComments={setPostComments}
-            postComments={postComments}
-          />
-        </>
-      )}
-    </>
-  );
+            postComments={postComments}/>
+             
+           </>) }
+       
+     </> )
 }

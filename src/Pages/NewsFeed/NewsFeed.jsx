@@ -51,7 +51,7 @@ export default function NewsFeed() {
              <Stories/>
               { isLoading ? [...Array(5)].map( ()=> <PostSkeleton />) : <>
               {posts &&
-                posts.map((post) => { return ( <PostCard key={post._id} post ={post} />
+                posts.map((post) => { return ( <PostCard getPosts={getPosts} key={post._id} post ={post} />
                   );
                 })}
               </>}
