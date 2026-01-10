@@ -136,8 +136,8 @@ export default function Comments({ postComments, setPostComments, post }) {
                     <DropdownItem
                       key="edit"
                       onPress={() => {
-                            setCommentMsg(postComments[0].content);
-                            setEditingCommentId(postComments[0]._id);
+                            setCommentMsg(comment.content);
+                            setEditingCommentId(comment._id);
                           }}
                       startContent={<CiEdit className="text-2xl" />}
                     >

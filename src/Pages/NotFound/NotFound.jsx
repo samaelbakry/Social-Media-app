@@ -4,7 +4,7 @@ import notFound from "../../assets/notFound.jpg"
 
 export default function NotFound() {
   return <>
-  <div className="flex flex-col gap-10 justify-center items-center min-h-screen">
+  <div className="flex flex-col gap-10 justify-center items-center">
     <img src={notFound}  className="max-h-[50vh] object-contain" alt="not-found-image" />
     <h1 className='text-5xl text-violet-900 font-bold'>
       Sorry! I think you broke the path

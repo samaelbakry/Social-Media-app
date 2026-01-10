@@ -105,7 +105,7 @@ export default function UserPostFooter({ post }) {
       {/* COMMENT DATA */}
        {postComments.length !== 0 && (
           <>
-        <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl">
+        <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl border border-gray-300">
               <div className="flex items-center gap-2">
                 <img
                   src={

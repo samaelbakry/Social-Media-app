@@ -27,8 +27,8 @@ export async function getPostComments(postId) {
         })
     return data
 }
-export async function updateComment(postId , content) {
-    const data = await axios.put(`${API_BASE_URL}/comments/${postId}`, content, {
+export async function updateComment(commentId , content) {
+    const data = await axios.put(`${API_BASE_URL}/comments/${commentId}`, content, {
             headers:{
                 token:localStorage.getItem("token")
             }

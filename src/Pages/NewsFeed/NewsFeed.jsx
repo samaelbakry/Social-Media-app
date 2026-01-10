@@ -33,8 +33,8 @@ export default function NewsFeed() {
 
   return (
     <>
-      <main className="">
-        <div className="grid grid-cols-8 shadow p-5  bg-gray-100  gap-4">
+      <main>
+        <div className="grid grid-cols-8 shadow p-10 bg-gray-100 gap-5">
           {/* first column  */}
           <div className=" hidden lg:block col-span-2">
             <div className="bg-blur">

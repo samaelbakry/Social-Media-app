@@ -34,7 +34,6 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen ,onOpenC
   }
   function handleClose(){
     setSelectedImage("")
-    onOpenChange(false)
     onClose()
   }
 

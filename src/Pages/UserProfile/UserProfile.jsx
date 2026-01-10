@@ -8,6 +8,7 @@ import UserPostCard from "./UserPostCard";
 import UserInfo from "./UserInfo";
 import ProfileHeader from "./ProfileHeader";
 import { MdPhotoCameraBack } from "react-icons/md";
+import { Divider } from "@heroui/react";
 
 
 
@@ -47,7 +48,9 @@ export default function UserProfile() {
     {/* USER POSTS */}
     <div className="lg:col-span-5 col-span-4 bg-blur m-5 p-5">
     <CreatePost/>
-    { userPosts.length === 0 && <>
+     <span className="text-gray-500 font-semibold p-2 m-3 text-2xl">Posts</span>
+       <Divider className="mb-2"/>
+    { userPosts.length === 0 && isLoading === false &&<>
     <div className="flex justify-center flex-wrap items-center gap-1 m-10 bg-blur h-50">
       <MdPhotoCameraBack className="text-2xl text-gray-400" />
       <span className="font-semibold text-2xl text-gray-400">Your feed is empty! Add your first post</span>
