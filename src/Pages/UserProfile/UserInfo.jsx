@@ -88,9 +88,9 @@ export default function UserInfo() {
     <div className="lg:col-span-3 col-span-4 bg-blur p-5 space-y-4 m-5 self-start">
     <span className="mb-5 p-2 text-2xl ">Account information</span>
     <Divider/>
-    {info.map((info) => <div className="flex items-center gap-4 "> 
+    {info.map((info) => <div className="flex items-center gap-1"> 
     {info.icon}
-    <span className="text-xl font-semibold">{info.data}</span>
+    <span className="md:text-xl font-semibold">{info.data}</span>
   </div>)}
   <form onSubmit={handleSubmit(changeMyPassword)}>
    <div className="flex flex-col space-y-5">

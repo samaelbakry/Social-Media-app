@@ -45,7 +45,7 @@ export default function UserProfile() {
     {/* PROFILE INFO */}
      <UserInfo/>
     {/* USER POSTS */}
-    <div className="lg:col-span-5 col-span-4 bg-blur m-5 p-5">
+    <div className="lg:col-span-5 col-span-4 bg-blur md:m-5 sm:p-1 lg:p-5">
     <CreatePost/>
      <span className="text-gray-500 font-semibold p-2 m-3 text-2xl">Posts</span>
        <Divider className="mb-2"/>

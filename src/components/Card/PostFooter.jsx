@@ -78,30 +78,31 @@ export default function PostFooter({ post, postComments, setPostComments }) {
     <>
       <div className="card-footer ">
         {/* REACTIONS */}
-        <div className="reactions flex justify-between">
+        <div className="reactions flex md:justify-between items-center justify-center">
           <div className="icon-wrap flex items-center">
-            <FcLike className="text-2xl" />
-            <BiLike className="text-2xl text-blue-400" />
-            <FaRegFaceLaughSquint className="text-2xl text-amber-300" />
-            <span className="text-md mx-2 text-gray-800 font-bold">
+            <FcLike className="md:text-2xl" />
+            <BiLike className="md:text-2xl text-blue-400" />
+            <FaRegFaceLaughSquint className="md:text-2xl text-amber-300" />
+            <span className="md:text-md mx-2 text-sm text-gray-800 font-semibold">
               Reactions
             </span>
           </div>
-          <div className="comments flex items-center">
-            <FaComment className="text-xl text-gray-800 mx-2" />
-            <span className="text-md text-gray-800 font-bold">
+          <div className="comments flex items-center ">
+            <FaComment className="md:text-xl text-gray-800 mx-2" />
+            <span className="md:text-md text-sm text-gray-800 font-semibold">
               {postComments.length} Comment
             </span>
+             
           </div>
         </div>
         {/* COMMENT INPUT */}
-        <div className=" flex items-center justify-center gap-4 m-2 p-3">
+        <div className="flex items-center justify-center md:gap-4 gap-2 md:m-2 p-3">
           <input
             value={commentMsg}
             onChange={(e) => getComment(e)}
             type="text"
             placeholder=" Add comment...."
-            className="bg-gray-200/60 rounded-xl w-full p-2 placeholder:text-gray-700"
+            className="bg-gray-200/60 rounded-xl w-1/2 md:w-full p-2 placeholder:text-gray-700"
           />
           <Button disabled={commentMsg ? false : true} isLoading={isLoading}
             onPress={() => {
@@ -114,14 +115,14 @@ export default function PostFooter({ post, postComments, setPostComments }) {
                 });
               }
             }}
-            className="cursor-pointer bg-violet-600 shadow-2xl  rounded-3xl disabled:bg-gray-200 disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed ">
-            <IoIosSend className="text-3xl text-gray-300 " />
+            className="cursor-pointer bg-violet-600 shadow-2xl rounded-3xl disabled:bg-gray-200 disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed ">
+            <IoIosSend className="md:text-3xl text-lg text-gray-300 " />
           </Button>
         </div>
         {/* COMMENT DATA */}
         {postComments.length !== 0 && (
           <>
-            <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl">
+            <div className="gap-2 flex justify-between items-center bg-gray-200/60  m-3 md:m-1 p-3 rounded-2xl">
               <div className="flex items-center gap-2">
                 <img
                   src={
@@ -130,24 +131,24 @@ export default function PostFooter({ post, postComments, setPostComments }) {
                       : postComments[0].commentCreator.photo
                   }
                   alt={postComments[0].commentCreator.name}
-                  className=" border border-violet-900 outline-offset-4 m-2 rounded-full size-10"
+                  className=" border border-violet-900 outline-offset-4 md:m-2 rounded-full md:size-10 size-6"
                 />
-                <div className="flex flex-col gap-1">
-                  <span className="font-bold capitalize text-gray-800">
+                <div className="flex flex-col md:gap-1">
+                  <span className="font-bold text-sm md:text-md capitalize text-gray-800">
                     {postComments[0].commentCreator.name}
                   </span>
-                  <p className="w-full rounded-lg text-gray-800">
+                  <p className="w-full rounded-lg text-sm md:text-md text-gray-800">
                     {postComments[0].content}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center flex-wrap">
                 <button
                   onClick={onOpen}
-                  className="mx-2 text-gray-800 font-semibold cursor-pointer"
+                  className="mx-2 text-gray-800 md:text-lg text-xs font-semibold  cursor-pointer"
                 >
                   view all comments
-                  <CiCircleChevDown className="inline-block mx-1 text-xl" />
+                  <CiCircleChevDown className="md:inline-block mx-1 md:text-xl hidden" />
                 </button>
                 {post.user._id === userData._id &&
                 userData._id === postComments[0].commentCreator._id ? (

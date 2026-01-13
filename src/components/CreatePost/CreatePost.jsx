@@ -10,13 +10,13 @@ export default function CreatePost( { getPosts }) {
 
   return (
     <>
-      <div className="p-2 bg-white/70 rounded-2xl m-2 flex justify-between items-center">
-        <h3 className="text-lg text-gray-600 p-4">
+      <div className="md:p-2 p-2 bg-white/70 rounded-2xl md:m-2 m-1 flex md:justify-between justify-center items-center">
+        <h3 className="md:text-lg text-gray-600 md:p-4 p-1 text-sm">
          Hey {userData.name}, How’s life treating you today 😄
         </h3>
          <div className="flex flex-wrap gap-3">
-        <Button className="bg-gray-100 p-1 m-2" onPress={onOpen}>
-          <span className="text-md font-bold text-violet-900 p-4 cursor-pointer ">
+        <Button className="bg-gray-100 p-1 md:m-2" onPress={onOpen}>
+          <span className="mf:text-md font-bold text-violet-900 p-4 cursor-pointer ">
             Create post
             <IoCreateOutline className="inline-block mx-2" />
           </span>

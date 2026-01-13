@@ -46,7 +46,7 @@ export default function NewsFeed() {
           </div>
           {/* middle column + posts */}
           <div className="lg:col-span-4 col-span-8">
-            <div className="bg-blur ">
+            <div className="bg-blur">
             <CreatePost getPosts={getPosts}/>
              <Stories/>
               { isLoading ? [...Array(5)].map( ()=> <PostSkeleton />) : <>

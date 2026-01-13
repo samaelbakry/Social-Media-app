@@ -27,7 +27,7 @@ export default function Navbar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-10 text-violet-900 mx-2"
+            className="md:size-10 size-6 text-violet-900 mx-2"
           >
             <path
               strokeLinecap="round"
@@ -35,7 +35,7 @@ export default function Navbar() {
               d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
             />
           </svg>
-          <h1 className="font-bold text-4xl text-violet-900">ECHO</h1>
+          <h1 className="font-bold md:text-4xl text-lg text-violet-900">ECHO</h1>
         </NavbarBrand>
         {/* SEARCH INPUT */}
         <NavbarContent as="div">
@@ -61,14 +61,14 @@ export default function Navbar() {
             <img
               src={userData.photo}
               alt={userData.name}
-              className=" size-9 object-cover rounded-full m-2 shadow shadow-violet-400 lg:hidden"
+              className="md:size-9 size-7 object-cover md:rounded-full m-2 shadow shadow-violet-400 lg:hidden"
             />
           </Link>
-          <span className="text-lg font-bold text-red-500 flex items-center gap-1">  
+          <span className="md:text-lg text-lg font-bold text-red-500 flex items-center gap-1">  
             <CiLogout
             onClick={logOut}
-            className="text-2xl text-red-500 cursor-pointer"
-          /> Log out
+            className="md:text-2xl text-lg text-red-500 cursor-pointer"
+          /> Logout
           </span>
         </NavbarContent>
       </HeroNavbar>

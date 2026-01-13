@@ -61,25 +61,25 @@ export default function UserPostFooter({ post }) {
     <>
       {/* FOOTER */}
       {/* REACTIONS */}
-      <div className="reactions flex justify-between">
-        <div className="icon-wrap flex items-center">
-          <FcLike className="text-2xl" />
-          <BiLike className="text-2xl text-blue-400" />
-          <FaRegFaceLaughSquint className="text-2xl text-amber-300" />
-          <span className="text-md mx-2 text-gray-800 font-bold">
+      <div className="reactions flex md:justify-between justify-center gap-2">
+        <div className="icon-wrap flex items-center p-0.5">
+          <FcLike className="md:text-2xl" />
+          <BiLike className="md:text-2xl text-blue-400" />
+          <FaRegFaceLaughSquint className="md:text-2xl text-amber-300" />
+          <span className="text-md md:mx-2 text-gray-800 font-semibold">
             Reactions
           </span>
         </div>
         <div className="comments flex items-center">
-          <FaComment className="text-xl text-gray-800 mx-2" />
-          <span className="text-md text-gray-800 font-bold">
+          <FaComment className="md:text-xl text-gray-800 mx-2" />
+          <span className="text-md text-gray-800 font-semibold">
             {post.comments.length} Comment
           </span>
         </div>
         {/* COMMENT INPUT */}
       </div>
       {/* COMMENT INPUT */}
-      <div className=" flex items-center shadow rounded-2xl justify-center gap-4 m-8 p-3">
+      <div className=" flex items-center shadow rounded-2xl justify-center gap-4  md:m-8 p-3">
         <input
           value={commentMsg}
           onChange={(e) => getComment(e)}
@@ -125,7 +125,7 @@ export default function UserPostFooter({ post }) {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center flex-wrap">
                 <button onClick={onOpen} className="mx-2 text-gray-800 font-semibold cursor-pointer" >view all comments
                 <CiCircleChevDown className="inline-block mx-1 text-xl" />
                 </button> 

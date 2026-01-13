@@ -33,23 +33,24 @@ export default function PostHeader({ post , getPosts }) {
   return (
     <>
       <div className="card-title flex items-center justify-between">
-        <div className="flex justify-start">
+        <div className="flex justify-start p-2">
           <img
             src={post.user.photo}
             alt={post.user.name}
-            className="size-20 object-cover rounded-full mx-3"
+            className="md:size-20 size-10 object-cover rounded-full mx-3"
           />
           <div className="flex flex-col">
-            <h1 className="text-xl font-semibold capitalize">
+            <h1 className="md:text-xl font-semibold capitalize">
               {post.user.name}
             </h1>
             <p className="text-sm flex items-center gap-1">
               <CiClock2 className="text-sm text-violet-500 inline-block" />
-              <span>
+              <span className="text-xs">
                 {new Date(post.createdAt).toLocaleString("en-us", {
                   timeStyle: "short",
                   dateStyle: "medium",
                 })}
+                
               </span>
             </p>
           </div>
