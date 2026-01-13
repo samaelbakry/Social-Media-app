@@ -66,8 +66,8 @@ export default function ThirdSideBar() {
           Mark all as read
         </span>
       </div>
-      {messages.map((msg) => (
-        <div className="bg-gray-100 shadow border border-gray-300 flex flex-col p-3 opacity-60 rounded-2xl m-3 hover:scale-105 hover:opacity-100 duration-500 cursor-pointer">
+      {messages.map((msg , index) => (
+        <div key={index} className="bg-gray-100 shadow border border-gray-300 flex flex-col p-3 opacity-60 rounded-2xl m-3 hover:scale-105 hover:opacity-100 duration-500 cursor-pointer">
           <span className="font-bold">{msg.person}</span>
           <span>{msg.msg}</span>
         </div>

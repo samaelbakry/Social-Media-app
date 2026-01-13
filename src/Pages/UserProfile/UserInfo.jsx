@@ -96,8 +96,8 @@ export default function UserInfo() {
    <div className="flex flex-col space-y-5">
     <span className="text-2xl p-1 m-1">Update your information</span>
     <Divider/>
-    <Input {...register("password")} className="text-2xl" type="text" placeholder="Enter your password"endContent={ <TbLockPassword />} errorMessage={errors.name?.message} isInvalid={Boolean(errors.name)}/>
-    <Input {...register("newPassword")} className="text-2xl" type="text" placeholder="Enter new password" endContent={ <TbLockPassword />} errorMessage={errors.name?.message} isInvalid={Boolean(errors.name)}/>
+    <Input {...register("password")} className="text-2xl" type="text" placeholder="Enter your password"endContent={ <TbLockPassword />} errorMessage={errors.password?.message} isInvalid={Boolean(errors.password)}/>
+    <Input {...register("newPassword")} className="text-2xl" type="text" placeholder="Enter new password" endContent={ <TbLockPassword />} errorMessage={errors.newPassword?.message} isInvalid={Boolean(errors.newPassword)}/>
      <Button type="submit" isLoading={isLoading} color="secondary" className="w-fit"> Change password</Button>
    </div>
   </form>

@@ -56,7 +56,7 @@ export default function FirstSideBar() {
   return (
     <>
       <Link to={"/home"}>
-        <logo className="flex items-center m-4">
+        <div className="flex items-center m-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -72,7 +72,7 @@ export default function FirstSideBar() {
             />
           </svg>
           <h1 className="font-bold text-4xl text-violet-900">ECHO</h1>
-        </logo>
+        </div>
       </Link>
       {/* side items mapping */}
       <div className="flex flex-col items-start m-6 p-6 space-y-4">

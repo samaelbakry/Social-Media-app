@@ -15,12 +15,11 @@ import { Divider } from "@heroui/react";
 export default function UserProfile() {
   const { userData } = useContext(homeContext)
   const [ userPosts , setUserPosts] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const userId = userData?._id
 
   async function getAllUserPosts(  ) {
     try {
-      setIsLoading(true)
       const {data} = await getUserPosts(userId)
       setUserPosts(data.posts)
       console.log(data);
@@ -37,7 +36,7 @@ export default function UserProfile() {
   }
   }, [userId])
   
-//bg-linear-to-bl from-gray-200 to-gray-400
+
   
   return <>
  <div className="grid lg:grid-cols-8 grid-cols-4 p-10 bg-gray-200">
