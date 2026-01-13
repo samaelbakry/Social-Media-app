@@ -66,20 +66,20 @@ export default function UserPostFooter({ post }) {
           <FcLike className="md:text-2xl" />
           <BiLike className="md:text-2xl text-blue-400" />
           <FaRegFaceLaughSquint className="md:text-2xl text-amber-300" />
-          <span className="text-md md:mx-2 text-gray-800 font-semibold">
+          <span className="md:text-md text-sm md:mx-2 text-gray-800 font-semibold">
             Reactions
           </span>
         </div>
         <div className="comments flex items-center">
           <FaComment className="md:text-xl text-gray-800 mx-2" />
-          <span className="text-md text-gray-800 font-semibold">
+          <span className="md:text-md text-sm text-gray-800 font-semibold">
             {post.comments.length} Comment
           </span>
         </div>
         {/* COMMENT INPUT */}
       </div>
       {/* COMMENT INPUT */}
-      <div className=" flex items-center shadow rounded-2xl justify-center gap-4  md:m-8 p-3">
+      <div className=" flex items-center shadow rounded-2xl justify-center gap-4 md:m-8 p-3">
         <input
           value={commentMsg}
           onChange={(e) => getComment(e)}
@@ -98,14 +98,14 @@ export default function UserPostFooter({ post }) {
           isLoading={isLoading}
           className="cursor-pointer bg-violet-600 shadow-xl outline-2 outline-violet-300 outline-offset-2 rounded-3xl disabled:bg-transparent disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed disabled:outline-0"
         >
-          <IoIosSend className="text-3xl text-gray-400" />
+          <IoIosSend className="md:text-3xl text-lg text-gray-400" />
         </Button>
       </div>
      
       {/* COMMENT DATA */}
        {postComments.length !== 0 && (
           <>
-        <div className=" gap-2 flex justify-between items-center bg-gray-200/60 p-2 rounded-2xl border border-gray-300">
+        <div className=" gap-2 flex md:justify-between justify-center items-center bg-gray-200/60 p-2 m-1 rounded-2xl border border-gray-300">
               <div className="flex items-center gap-2">
                 <img
                   src={
@@ -117,29 +117,29 @@ export default function UserPostFooter({ post }) {
                   className=" border border-violet-900 outline-offset-4 m-2 rounded-full size-10"
                 />
                 <div className="flex flex-col gap-1">
-                  <span className="font-bold capitalize text-gray-800">
+                  <span className="font-semibold md:text-medium text-sm capitalize text-gray-800">
                     {postComments[0].commentCreator.name}
                   </span>
-                  <p className="w-full rounded-lg text-gray-800">
+                  <p className="w-full font-semibold md:text-medium text-sm rounded-lg text-gray-800">
                     {postComments[0].content}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center flex-wrap">
-                <button onClick={onOpen} className="mx-2 text-gray-800 font-semibold cursor-pointer" >view all comments
-                <CiCircleChevDown className="inline-block mx-1 text-xl" />
+              <div className="flex items-center flex-wrap ">
+                <button onClick={onOpen} className="mx-2 text-gray-800 cursor-pointer font-semibold md:text-medium text-sm" >view all comments
+                <CiCircleChevDown className="md:inline-block hidden mx-1 text-xl" />
                 </button> 
                  {post.user._id === userData._id &&
                  userData._id === postComments[0].commentCreator._id ? (
                 <>
                   <Dropdown className="bg-blur font-bold ">
                     <DropdownTrigger>
-                      <HiDotsVertical className="text-2xl" />
+                      <HiDotsVertical className="md:text-2xl" />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Static Actions" variant="faded">
                       <DropdownItem
                         key="edit"
-                        startContent={<CiEdit className="text-2xl" />}
+                        startContent={<CiEdit className="md:text-2xl" />}
                       >
                         Edit comment
                       </DropdownItem>
@@ -148,7 +148,7 @@ export default function UserPostFooter({ post }) {
                         className="text-danger"
                         onPress={()=>{deleteMyComment(postComments[0]._id)}}
                         color="danger"
-                        startContent={<AiFillDelete className="text-2xl" />}
+                        startContent={<AiFillDelete className="md:text-2xl" />}
                       >
                         Delete comment
                       </DropdownItem>

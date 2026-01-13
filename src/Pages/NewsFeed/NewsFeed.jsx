@@ -33,6 +33,7 @@ export default function NewsFeed() {
 
   return (
     <>
+    <title>For you page</title>
       <main>
         <div className="grid grid-cols-8 shadow p-10 bg-gray-100 gap-5">
           {/* first column  */}

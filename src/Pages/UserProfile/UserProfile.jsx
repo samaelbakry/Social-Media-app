@@ -39,6 +39,7 @@ export default function UserProfile() {
 
   
   return <>
+      <title>Profile</title>
  <div className="grid lg:grid-cols-8 grid-cols-4 p-10 bg-gray-200">
     {/* PROFILE HEADER */}
     <ProfileHeader/>
