@@ -11,7 +11,7 @@ export default function PostCard({ post , getPosts }) {
   
   return (
     <>
-      <div className="card md:shadow-xl border border-gray-300 md:m-4 m-6 sm:p-5 rounded-3xl">
+      <div className="card md:shadow-xl border border-gray-300 md:m-4 m-2 sm:p-5 rounded-3xl">
         <PostHeader getPosts={getPosts} post={post} />
         <PostBody post={post}/>
         <PostFooter getPosts={getPosts} post={post}  postComments={postComments} setPostComments={setPostComments} />

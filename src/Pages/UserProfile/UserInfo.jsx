@@ -85,16 +85,16 @@ export default function UserInfo() {
   }
   return <>
     {/* USER INFO */}
-    <div className="lg:col-span-3 col-span-4 bg-blur p-5 space-y-4 m-5 self-start">
-    <span className="mb-5 p-2 text-2xl ">Account information</span>
+    <div className="lg:col-span-3 col-span-4 bg-blur md:p-5 p-1 space-y-4 md:m-5 m-3 self-start">
+    <span className="mb-5 p-2 md:text-2xl text-md">Account information</span>
     <Divider/>
     {info.map((info) => <div className="flex items-center gap-1"> 
     {info.icon}
-    <span className="md:text-xl font-semibold">{info.data}</span>
+    <span className="md:text-xl text-sm font-semibold">{info.data}</span>
   </div>)}
   <form onSubmit={handleSubmit(changeMyPassword)}>
    <div className="flex flex-col space-y-5">
-    <span className="text-2xl p-1 m-1">Update your information</span>
+    <span className="md:text-2xl text-md p-1 m-1">Update your information</span>
     <Divider/>
     <Input {...register("password")} className="text-2xl" type="text" placeholder="Enter your password"endContent={ <TbLockPassword />} errorMessage={errors.password?.message} isInvalid={Boolean(errors.password)}/>
     <Input {...register("newPassword")} className="text-2xl" type="text" placeholder="Enter new password" endContent={ <TbLockPassword />} errorMessage={errors.newPassword?.message} isInvalid={Boolean(errors.newPassword)}/>

@@ -78,7 +78,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
     <>
       <div className="card-footer ">
         {/* REACTIONS */}
-        <div className="reactions flex md:justify-between items-center justify-center">
+        <div className="reactions flex md:justify-between items-center justify-center gap-5 md:ap-0">
           <div className="icon-wrap flex items-center">
             <FcLike className="md:text-2xl" />
             <BiLike className="md:text-2xl text-blue-400" />
@@ -102,7 +102,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
             onChange={(e) => getComment(e)}
             type="text"
             placeholder=" Add comment...."
-            className="bg-gray-200/60 rounded-xl w-1/2 md:w-full p-2 placeholder:text-gray-700"
+            className="bg-gray-200/60 rounded-xl w-fit md:w-full p-2 placeholder:text-gray-700"
           />
           <Button disabled={commentMsg ? false : true} isLoading={isLoading}
             onPress={() => {
@@ -115,7 +115,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
                 });
               }
             }}
-            className="cursor-pointer bg-violet-600 shadow-2xl rounded-3xl disabled:bg-gray-200 disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed ">
+            className="cursor-pointer bg-violet-600 shadow-2xl rounded-3xl disabled:bg-gray-200 disabled:shadow-violet-500 disabled:shadow disabled:cursor-not-allowed">
             <IoIosSend className="md:text-3xl text-lg text-gray-300 " />
           </Button>
         </div>

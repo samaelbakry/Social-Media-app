@@ -45,7 +45,7 @@ const { userData } = useContext(homeContext)
   
 
   return <>
-  <div className="lg:col-span-8 col-span-4 bg-blur p-6 m-5 flex flex-wrap justify-between items-center md:gap-1 gap-5">
+  <div className="lg:col-span-8 col-span-4 bg-blur p-2 md:p-6  md:m-5 m-2 flex flex-wrap justify-between items-center md:gap-1 gap-5">
      <div className="flex items-center gap-3">
    <div className="relative">
     {isLoading ? <Skeleton className="rounded-full size-30" /> :
@@ -61,11 +61,11 @@ const { userData } = useContext(homeContext)
      </div>
      </div>
      
-     <div className="flex flex-wrap  items-center gap-3 p-1">
-      <span className="font-semibold text-md text-gray-700 shadow capitalize bg-gray-300 p-3 rounded-2xl flex items-center gap-2 cursor-pointer">
+     <div className="flex flex-wrap items-center gap-3 p-1">
+      <span className="font-semibold text-md text-gray-700 shadow capitalize bg-gray-300 md:p-3 p-2 rounded-2xl flex items-center gap-2 cursor-pointer">
          <CiEdit className="text-xl text-violet-800"/>
          edit profile</span>
-      <span className="font-semibold text-md text-gray-700 shadow capitalize bg-gray-300 p-3 rounded-2xl flex items-center gap-2 cursor-pointer">
+      <span className="font-semibold text-md text-gray-700 shadow capitalize bg-gray-300 md:p-3 p-2 rounded-2xl flex items-center gap-2 cursor-pointer">
          <CiCirclePlus className="text-xl text-violet-800" />
          upload story</span>
      </div>

@@ -61,7 +61,7 @@ export default function Navbar() {
             <img
               src={userData.photo}
               alt={userData.name}
-              className="md:size-9 size-7 object-cover md:rounded-full m-2 shadow shadow-violet-400 lg:hidden"
+              className="md:size-9 size-7 object-cover rounded-full m-2 shadow shadow-violet-400 lg:hidden"
             />
           </Link>
           <span className="md:text-lg text-lg font-bold text-red-500 flex items-center gap-1">  

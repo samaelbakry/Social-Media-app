@@ -35,7 +35,7 @@ export default function NewsFeed() {
     <>
     <title>For you page</title>
       <main>
-        <div className="grid grid-cols-8 shadow p-10 bg-gray-100 gap-5">
+        <div className="grid grid-cols-8 shadow md:p-10 p-2 bg-gray-100 gap-5">
           {/* first column  */}
           <div className=" hidden lg:block col-span-2">
             <div className="bg-blur">
