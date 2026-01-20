@@ -117,7 +117,7 @@ export default function Register() {
             <p>
               Don't have an account ?
               <Link className="font-bold mx-1" to={"/Register"}>
-                log in
+                Sign in
               </Link>
             </p>
           </div>

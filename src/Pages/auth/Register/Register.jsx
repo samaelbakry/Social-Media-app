@@ -91,7 +91,7 @@ async function sendFormData(formData){
             <p>
               already have an account ?
               <Link className="font-bold mx-1" to={"/login"}>
-                sign in
+                log in
               </Link>
             </p>
           </div>
