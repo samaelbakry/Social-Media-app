@@ -12,7 +12,7 @@ export default function CreatePost( { getPosts }) {
     <>
       <div className="p-2 bg-white/70 rounded-2xl md:m-2 m-1 flex md:justify-between justify-center items-center">
         <h3 className="md:text-lg text-gray-600 md:p-4 p-1 text-xs">
-         Hey {userData.name}, How’s life treating you today 😄
+         Hey {userData?.name}, How’s life treating you today 😄
         </h3>
          <div className="flex flex-wrap gap-3">
         <Button className="bg-gray-100 md:m-2" onPress={onOpen}>

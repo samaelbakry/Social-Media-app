@@ -59,8 +59,8 @@ export default function Navbar() {
         <NavbarContent as="div" justify="end" className="space-x-2" >
            <Link to={"/userprofile"}>
             <img
-              src={userData.photo}
-              alt={userData.name}
+              src={userData?.photo}
+              alt={userData?.name}
               className="md:size-9 size-7 object-cover rounded-full m-2 shadow shadow-violet-400 lg:hidden"
             />
           </Link>

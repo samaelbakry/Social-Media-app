@@ -25,23 +25,23 @@ export default function UserInfo() {
     const info = [
     {
       icon:<MdDriveFileRenameOutline className="text-violet-900 text-2xl"/>,
-      data:userData.name
+      data:userData?.name
     },
     {
       icon:<MdAlternateEmail className="text-violet-900 text-2xl"/>,
-      data:userData.email
+      data:userData?.email
     },
     {
       icon:<HiOutlineIdentification className="text-violet-900 text-2xl"/>,
-      data:"_id "+userData._id
+      data:"_id "+userData?._id
     },
     {
     icon:<CiUser className="text-violet-900 text-2xl"/>,
-    data:userData.gender
+    data:userData?.gender
   },
   {
     icon:<LiaBirthdayCakeSolid className="text-violet-900 text-2xl"/>,
-    data:userData.dateOfBirth
+    data:userData?.dateOfBirth
   }]
     const friends = [
     {
@@ -75,7 +75,6 @@ export default function UserInfo() {
         if(data.message === "success"){
       localStorage.setItem("token" ,data.token)
       toast.success("password changed Successfully !" , { position:"top-center"})
-     
     } 
     } catch (error) {
         console.log(error);
