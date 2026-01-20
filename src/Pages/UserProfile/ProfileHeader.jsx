@@ -50,7 +50,7 @@ const { userData } = useContext(homeContext)
    <div className="relative">
     {isLoading ? <Skeleton className="rounded-full size-30" /> :
      <img src={uploadUserPhoto ? URL.createObjectURL(uploadUserPhoto) : 
-     userData.photo} alt="userImage" className="size-30 object-cover rounded-full m-2 shadow shadow-violet-400"/>  }
+     userData.photo} alt="userImage" className="md:size-30 size-20 object-cover rounded-full m-2 shadow shadow-violet-400"/>  }
      <IoCamera onClick={clickUpload} className="text-3xl text-gray-700 rounded-full  cursor-pointer hover:text-violet-900 bg-gray-50 p-1 absolute bottom-2 right-2" />
      <input onChange={choosePhoto} type="file" ref={uploadPhoto} className='hidden'/>
      </div>

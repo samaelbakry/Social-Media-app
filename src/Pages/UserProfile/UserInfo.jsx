@@ -85,7 +85,7 @@ export default function UserInfo() {
   }
   return <>
     {/* USER INFO */}
-    <div className="lg:col-span-3 col-span-4 bg-blur md:p-5 p-1 space-y-4 md:m-5 m-3 self-start">
+    <div className="lg:col-span-3 col-span-4 bg-blur md:p-5 p-3 space-y-4 md:m-5 m-3 self-start">
     <span className="mb-5 p-2 md:text-2xl text-md">Account information</span>
     <Divider/>
     {info.map((info) => <div className="flex items-center gap-1"> 

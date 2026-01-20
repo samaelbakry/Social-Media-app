@@ -35,9 +35,9 @@ export default function UserPostHeader( {post , getAllUserPosts}) {
   {/* HEADER */}
         <div className="card-title flex items-center justify-between m-2">
           <div className="flex justify-start">
-            <img  src={userData.photo} alt={userData.name} className="size-20 object-cover rounded-full mx-3 shadow shadow-violet-400" />
+            <img  src={userData.photo} alt={userData.name} className="md:size-20 size-12 object-cover rounded-full mx-3 shadow shadow-violet-400" />
             <div className="flex flex-col">
-              <h1 className="text-xl font-semibold capitalize">{userData.name}</h1>
+              <h1 className="md:text-xl text-medium font-semibold capitalize">{userData.name}</h1>
               <p className="text-sm flex items-center gap-1">
                 <CiClock2 className="text-sm text-violet-500 inline-block" />
                 <span>{new Date(post.createdAt).toLocaleDateString()}</span>

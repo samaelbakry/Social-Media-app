@@ -46,14 +46,14 @@ export default function UserProfile() {
     {/* PROFILE INFO */}
      <UserInfo/>
     {/* USER POSTS */}
-    <div className="lg:col-span-5 col-span-4 bg-blur md:m-5 sm:p-1 lg:p-5">
+    <div className="lg:col-span-5 col-span-4 bg-blur md:m-5 p-1 m-4  lg:p-5">
     <CreatePost/>
-     <span className="text-gray-500 font-semibold p-2 m-3 text-2xl">Posts</span>
+     <span className="text-gray-500 font-semibold p-2 md:m-3 text-medium md:text-2xl">Posts</span>
        <Divider className="mb-2"/>
     { userPosts.length === 0 && isLoading === false &&<>
-    <div className="flex justify-center flex-wrap items-center gap-1 m-10 bg-blur h-50">
-      <MdPhotoCameraBack className="text-2xl text-gray-400" />
-      <span className="font-semibold text-2xl text-gray-400">Your feed is empty! Add your first post</span>
+    <div className="flex justify-center flex-wrap items-center gap-1 md:m-10 m-2 bg-blur md:h-50 h-30">
+      <MdPhotoCameraBack className="md:text-2xl text-medium text-gray-400" />
+      <span className="font-semibold md:text-2xl text-medium text-gray-400">Your feed is empty! Add your first post</span>
     </div>
     </>}
       { isLoading ? [...Array(3)].map( ()=> <PostSkeleton />)  : <>
