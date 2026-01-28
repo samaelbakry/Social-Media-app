@@ -1,7 +1,7 @@
 import * as zod from "zod"
 
 export const registerSchema = zod.object({
-    name: zod.string().nonempty("Name is required").min(3, "Name must be at least 3 characters").max(10, "Name must be at most 10 characters"),
+    name: zod.string().nonempty("Name is required").min(3, "Name must be at least 3 characters").max(20, "Name must be at most 20 characters").trim(),
     email: zod.email("Please enter a valid email address"),
     password: zod.string().nonempty("password is required").min(3, "password must be at least 3 characters").max(20, "password must be at most 20 characters"),
     rePassword: zod.string().nonempty("rePassword is required"),
