@@ -17,6 +17,7 @@ export default function Register() {
 
     defaultValues:{
     name:"",
+    username: "",
     email:"",
     password:"",
     rePassword:"",
@@ -31,13 +32,13 @@ export default function Register() {
 async function sendFormData(formData){
   try {
     const response =  await registerForm(formData)
-    if(response.data.message === "success"){
+    console.log(response);
+
+    if(response.data.success){
       setTimeout(() => {
        navigate("/login")
-       localStorage.setItem("token" ,response.data.token)
-      
-      }, 2000);
-
+       localStorage.setItem("token" ,response.data.data.token)
+      }, 1000);
       toast.success("Account Created Successfully !" , {
         position:"top-center"
       })
@@ -65,20 +66,21 @@ async function sendFormData(formData){
         </h1>
         <p className="text-2xl font-semibold text-gray-700">Join our community !</p>
         <form className="space-y-5" onSubmit={handleSubmit(sendFormData)} method="POST" >
-          <Input {...register("name")} label="name" type="text" errorMessage={errors.name?.message} isInvalid={Boolean(errors.name)}  />
+          <Input {...register("name")} label="Name" type="text" errorMessage={errors.name?.message} isInvalid={Boolean(errors.name)}  />
+          <Input {...register("username")} label="User Name" type="text" errorMessage={errors.username?.message} isInvalid={Boolean(errors.username)}  />
 
-          <Input {...register("email")} label="email" type="email" errorMessage={errors.email?.message} isInvalid={Boolean(errors.email)} />
+          <Input {...register("email")} label="Email" type="email" errorMessage={errors.email?.message} isInvalid={Boolean(errors.email)} />
 
-          <Input {...register("password")} label="password" type={showPassword ?"text":"password"} errorMessage={errors.password?.message} isInvalid={Boolean(errors.password)}
+          <Input {...register("password")} label="Password" type={showPassword ?"text":"password"} errorMessage={errors.password?.message} isInvalid={Boolean(errors.password)}
            endContent={ showPassword ? <LuEyeClosed className="text-2xl inline-block text-gray-600 cursor-pointer" onClick={()=>{setShowPassword(false)} } />        
            :  <FaRegEye className="text-2xl inline-block text-gray-600 cursor-pointer" onClick={()=>{setShowPassword(true)}} />  }
              />
-          <Input {...register("rePassword")} label="rePassword" type="password" errorMessage={errors.rePassword?.message} isInvalid={Boolean(errors.rePassword)}   />
+          <Input {...register("rePassword")} label="Repassword" type="password" errorMessage={errors.rePassword?.message} isInvalid={Boolean(errors.rePassword)}   />
 
           <div className="flex items-center gap-1">
-            <Input {...register("dateOfBirth")} label="date of birth" type="date" errorMessage={errors.dateOfBirth?.message} isInvalid={Boolean(errors.dateOfBirth)} />
+            <Input {...register("dateOfBirth")} label="Date Of Birth" type="date" errorMessage={errors.dateOfBirth?.message} isInvalid={Boolean(errors.dateOfBirth)} />
 
-            <Select {...register("gender")}  label="gender" errorMessage={errors.gender?.message} isInvalid={Boolean(errors.gender)}>
+            <Select {...register("gender")}  label="Gender" errorMessage={errors.gender?.message} isInvalid={Boolean(errors.gender)}>
               <SelectItem key={"m"}>male</SelectItem>
               <SelectItem key={"f"}>Female</SelectItem>
             </Select>

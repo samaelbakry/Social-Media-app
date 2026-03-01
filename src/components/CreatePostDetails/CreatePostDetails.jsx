@@ -48,12 +48,12 @@ export default function CreatePostDetails( { getPosts , isOpen , onOpen ,onOpenC
     setIsLoading(true)
     try {
       if(post)
-        { const { data } = await updatePost(post?._id , formData)
+        { const data = await updatePost(post._id , formData)
       toast.success('Done! Your post is updated')
       console.log(data);
     }
       else
-        {const { data } = await createPost(formData)
+        {const data = await createPost(formData)
        toast.success('Your post was published')
       console.log(data);
     }

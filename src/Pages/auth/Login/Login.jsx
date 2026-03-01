@@ -15,11 +15,7 @@ export default function Register() {
   const { setIsLoggedIn } = useContext(homeContext);
   const [showPassword, setShowPassword] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
+  const {register,handleSubmit,formState: { errors, isSubmitting }, } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -32,12 +28,12 @@ export default function Register() {
     try {
       const response = await loginForm(formData);
       console.log(response);
-      if (response.data.message === "success") {
+      if (response.data.success) {
         setTimeout(() => {
           navigate("/home");
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("token", response.data.data.token);
           setIsLoggedIn(true);
-        }, 2000);
+        }, 1000);
         
          toast.success("Account Logged in Successfully !", {
             position: "top-center",

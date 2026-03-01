@@ -7,13 +7,13 @@ export default function HomeContextProvider({children}) {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token")!=null)
     const [ userData , setUserData] = useState("")
  
-
     useEffect(() => {
       
     async function getData() { // all user data
       try {
         const {data} = await getUserData()
-        setUserData(data.user)
+        console.log(data);
+        setUserData(data.data.user)
       } catch (error) {
         console.log(error);
       }

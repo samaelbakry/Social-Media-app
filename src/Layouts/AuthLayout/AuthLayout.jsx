@@ -6,10 +6,8 @@ export default function AuthLayout() {
   return <>
   <main className='gradient'>
     <div className="grid grid-cols-4">
-      
       <div className="col-span-4 flex justify-center items-center">
         <Outlet/>
-        
       </div>
     </div>
   </main>

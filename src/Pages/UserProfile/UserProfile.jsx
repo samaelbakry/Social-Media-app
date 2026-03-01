@@ -13,15 +13,16 @@ import { Divider } from "@heroui/react";
 
 
 export default function UserProfile() {
+  
   const { userData } = useContext(homeContext)
   const [ userPosts , setUserPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const userId = userData?._id
+  // const userId = userData?._id
 
   async function getAllUserPosts(  ) {
     try {
-      const {data} = await getUserPosts(userId)
-      setUserPosts(data.posts)
+      const data = await getUserPosts()
+      // setUserPosts(data.posts)
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -31,10 +32,8 @@ export default function UserProfile() {
   }
 
   useEffect(() => {
-   if (userId) {
     getAllUserPosts()
-  }
-  }, [userId])
+  }, [])
   
 
   

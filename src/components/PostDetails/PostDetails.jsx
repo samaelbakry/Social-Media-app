@@ -1,27 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, ModalContent, ModalBody, Button } from "@heroui/react";
-import { getPostsId } from "../../Services/allPostsServices";
 import PostSkeleton from "../PostSkeleton/PostSkeleton";
 import PostHeader from "../Card/PostHeader";
 import PostBody from "../Card/PostBody";
+import Comments from "../Comments/Comments";
 import { FcLike } from "react-icons/fc";
 import { BiLike } from "react-icons/bi";
 import { FaRegFaceLaughSquint } from "react-icons/fa6";
 import { FaComment } from "react-icons/fa";
-import Comments from "../Comments/Comments";
 import { homeContext } from "../../context/HomeContext";
+import { getPostId } from "../../Services/allPostsServices";
 
 
-export default function PostDetails({ onOpenChange,isOpen, postId, setPostComments, postComments }) {
- const [isLoading, setIsLoading] = useState(false)
+export default function PostDetails({ onOpenChange,isOpen, postId, setPostComments, postComments  }) {
+
+  const [isLoading, setIsLoading] = useState(false)
   const [post, setPost] = useState("");
-    const { userData } = useContext(homeContext);
+  const { userData } = useContext(homeContext);
 
   async function getDetails() {
     setIsLoading(true);
     try {
-      const { data } = await getPostsId(postId);
-      setPost(data.post);
+      const { data } = await getPostId(postId);
+      setPost(data?.data.post)
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -56,7 +57,7 @@ export default function PostDetails({ onOpenChange,isOpen, postId, setPostCommen
                           <PostBody postDetails post={post} />
                           {/* POST FOOTER */}
                           {/* REACTIONS */}
-                          <div className="reactions flex justify-between">
+                          {/* <div className="reactions flex justify-between">
                             <div className="icon-wrap flex items-center">
                               <FcLike className="text-2xl" />
                               <BiLike className="text-2xl text-blue-400" />
@@ -71,9 +72,11 @@ export default function PostDetails({ onOpenChange,isOpen, postId, setPostCommen
                                 {postComments.length} Comment
                               </span>
                             </div>
-                          </div>
+                          </div> */}
                           {/* (ALL COMMENTS) *//* COMMENT INPUT */}
-                          {postComments.length !== 0 && <Comments postComments={postComments}  post={post} setPostComments={setPostComments} />}
+                          {/* {postComments.length !== 0 && <Comments postComments={postComments}  post={post} setPostComments={setPostComments} />} */}
+                          <Comments post={post}/>
+                       
                         </ModalBody>
                       </>
                     )}

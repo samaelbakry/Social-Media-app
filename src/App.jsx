@@ -13,22 +13,23 @@ import AuthProtectedRoutes from './components/ProtectedRoutes/AuthProtectedRoute
 
 function App() {
     const router = createBrowserRouter ([
-        { path :"/", element: <MainLayout /> ,children: [
-
+        { path :"/", element: <MainLayout /> ,children: 
+            [
             {index:true, element: <ProtectedRoutes> <Navigate to={"/home"} /> </ProtectedRoutes>},
             {path:"/home" , element: <ProtectedRoutes><NewsFeed /></ProtectedRoutes>},
-           ]
+            ]
         },
         { path :"/userprofile", element:<ProtectedRoutes> <UserProfile /> </ProtectedRoutes>},
         
          {path:"*",element:<NotFound />},
 
-        { path :"/", element: <AuthLayout/>, children: [
+         { path :"/", element: <AuthLayout/>, children: 
+            [
 
             {path:"/register" , element :<AuthProtectedRoutes> <Register/> </AuthProtectedRoutes>},
             {path:"/login" ,element: <AuthProtectedRoutes> <Login /> </AuthProtectedRoutes>} 
-
-        ]}
+        
+           ]}
     ])
 return<>
 

@@ -13,13 +13,14 @@ import { getAllPosts } from "../../Services/allPostsServices";
 export default function NewsFeed() {
  
    const [isLoading, setIsLoading] = useState(false)
-    const [posts, setPosts] = useState([]);
+   const [posts, setPosts] = useState([]);
 
   async function getPosts() { //all posts
     try {
       setIsLoading(true)
-      const { data } = await getAllPosts();
-      setPosts(data.posts);
+      const {data}  = await getAllPosts();
+      console.log(data);
+      setPosts(data?.data.posts);
     } catch (error) {
       console.log(error);
       
@@ -27,6 +28,7 @@ export default function NewsFeed() {
       setIsLoading(false)
     }
   }
+  
     useEffect(() => {
     getPosts();
   }, []);
@@ -52,7 +54,7 @@ export default function NewsFeed() {
              <Stories/>
               { isLoading ? [...Array(5)].map( ()=> <PostSkeleton />) : <>
               {posts &&
-                posts.map((post) => { return ( <PostCard getPosts={getPosts} key={post._id} post ={post} />
+                posts.map((post) => { return ( <PostCard getPosts={getPosts} key={post.id} post ={post} />
                   );
                 })}
               </>}

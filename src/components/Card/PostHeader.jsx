@@ -9,6 +9,7 @@ import { deletePost } from "../../Services/allPostsServices";
 import { toast } from "react-toastify";
 
 
+
 export default function PostHeader({ post , getPosts }) {
   const {userData} = useContext(homeContext)
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,7 +18,7 @@ export default function PostHeader({ post , getPosts }) {
     async function deleteMyPost() {
     try {
       setIsLoading(true)
-       const { data } = await deletePost(post._id)
+       const data = await deletePost(post._id)
       console.log(data);
       toast.success("Done! The post was deleted")
       getPosts()
@@ -50,12 +51,13 @@ export default function PostHeader({ post , getPosts }) {
                   timeStyle: "short",
                   dateStyle: "medium",
                 })}
-                
               </span>
+               <span>{post.privacy}</span>
             </p>
           </div>
         </div>
-       { post.user._id === userData._id ? <Dropdown className="bg-blur">
+        {post.user.name === userData.name && <>
+          <Dropdown className="bg-blur">
         <DropdownTrigger>
             <HiDotsVertical className="text-2xl" />
           </DropdownTrigger>
@@ -67,7 +69,9 @@ export default function PostHeader({ post , getPosts }) {
               {isLoading ? <Spinner color="secondary"/> : ""} Delete Post
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>: ""}
+        </Dropdown>
+        </>}
+      
         <CreatePostDetails post={post} osOpen={onOpen} isOpen={isOpen} getPosts={getPosts}/>
         
       </div>
